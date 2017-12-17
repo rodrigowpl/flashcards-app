@@ -1,0 +1,37 @@
+export const white = '#ffffff'
+
+export const blueDark = '#1e5281'
+export const blueSemiDark = '#2870b2'
+export const blue = '#6197c6'
+export const blueSemiLight = '#afcef3'
+export const blueLight = '#e7f0f7'
+
+export const greenDark = '#557c23'
+export const greenSemiDark = '#6f9e32'
+export const green = '#8cc152'
+export const greenSemiLight = '#afd485'
+export const greenLight = '#dcecc9'
+
+export const yellowDark = '#b98b1f'
+export const yellowSemiDark = '#ffc107'
+export const yellow = '#fed057'
+export const yellowSemiLight = '#fee194'
+export const yellowLight = '#fff2d2'
+
+export const redDark = '#b63f43'
+export const redSemiDark = '#f9575b'
+export const red = '#fb8486'
+export const redSemiLight = '#fbb0b3'
+export const redLight = '#fcdfdf'
+
+export const grayDark = '#496072'
+export const graySemiDark = '#95a3b7'
+export const gray = '#c5d0e1'
+export const graySemiLight = '#e5edf4'
+export const grayLight = '#f4f5f8'
+
+export const blackDark = '#2c3848'
+export const blackSemiDark = '#314056'
+export const black = '#3b495e'
+export const blackSemiLight = '#4f5c6f'
+export const blackLight = '#646f80'
