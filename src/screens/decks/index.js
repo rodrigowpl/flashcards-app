@@ -9,7 +9,7 @@ export class Decks extends PureComponent {
     title: 'Decks'
   }
 
-  openAddDeckScreen = () => {
+  goAddDeckScreen = () => {
     const { navigation } = this.props
 
     navigation.navigate('AddDeck')
@@ -19,7 +19,7 @@ export class Decks extends PureComponent {
     return (
       <Container>
         <DeckList />
-        <FlatButton onPress={this.openAddDeckScreen} />
+        <FlatButton onPress={this.goAddDeckScreen} />
       </Container>
     )
   }

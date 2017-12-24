@@ -13,6 +13,22 @@ export const searchDecks = () => dispatch => {
     {
         title: 'Elasticsearch',
         avaliableCards: 8
+    },
+    {
+        title: 'Kibana',
+        avaliableCards: 98
+    },
+    {
+        title: 'Css',
+        avaliableCards: 20
+    },
+    {
+        title: 'Inglês',
+        avaliableCards: 120
+    },
+    {
+        title: 'Thunk',
+        avaliableCards: 80
     }
   ]
 

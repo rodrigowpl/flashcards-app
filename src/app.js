@@ -5,7 +5,7 @@ import { MainNavigation } from 'components'
 export default class App extends PureComponent {
   render () {
     return (
-      <Container>
+      <Container stretch={true}>
         <StatusBar />
         <MainNavigation />
       </Container>
