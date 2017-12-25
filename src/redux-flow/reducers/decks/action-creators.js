@@ -1,36 +1,11 @@
 import { SEARCH_DECKS } from './actions'
+import { getData } from 'utils/storage'
+import { DECKS_DATA } from 'utils/constants'
 
 export const searchDecks = () => dispatch => {
-  const mockData = [
-    {
-        title: 'React',
-        avaliableCards: 5
-    },
-    {
-        title: 'Redux',
-        avaliableCards: 15
-    },
-    {
-        title: 'Elasticsearch',
-        avaliableCards: 8
-    },
-    {
-        title: 'Kibana',
-        avaliableCards: 98
-    },
-    {
-        title: 'Css',
-        avaliableCards: 20
-    },
-    {
-        title: 'Inglês',
-        avaliableCards: 120
-    },
-    {
-        title: 'Thunk',
-        avaliableCards: 80
-    }
-  ]
-
-  dispatch({ type: SEARCH_DECKS, payload: mockData })
+  getData(DECKS_DATA)
+    .then(data => {
+      console.log(data)
+      dispatch({ type: SEARCH_DECKS, payload: data })
+    })
 }

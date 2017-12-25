@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react'
 import { Text } from 'react-native'
 import { Container } from 'layout'
 import DeckList from './deck-list'
-import { FlatButton } from 'components'
+import { FloatingButton } from 'components'
 
 export class Decks extends PureComponent {
   static navigationOptions = {
-    title: 'Decks'
+    title: 'DECKS'
   }
 
   goAddDeckScreen = () => {
@@ -19,7 +19,7 @@ export class Decks extends PureComponent {
     return (
       <Container>
         <DeckList />
-        <FlatButton onPress={this.goAddDeckScreen} />
+        <FloatingButton onPress={this.goAddDeckScreen} />
       </Container>
     )
   }

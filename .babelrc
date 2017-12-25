@@ -13,7 +13,8 @@
         "layout": "./src/layout",
         "style": "./src/style",
         "screens": "./src/screens",
-        "components": "./src/components"
+        "components": "./src/components",
+        "utils": "./src/utils"
       }
     }]
   ]

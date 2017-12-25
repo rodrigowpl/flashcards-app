@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import { searchDecks } from 'reducers/decks/action-creators'
 import { bindActionCreators } from 'redux'
@@ -18,12 +18,12 @@ class DeckList extends PureComponent {
 
 		return (
 			<ScrollView>
-				{decks.map((deck, index) => (
+				{decks ? decks.map((deck, index) => (
 					<Deck
 						key={index}
 						deck={deck}
 						marginTop={index > 0} />
-				))}
+				)) : <Text> Nenhum card :( </Text>}
 			</ScrollView>
 		)
 	}
@@ -33,7 +33,7 @@ DeckList.propTypes = {
 	decks: PropTypes.arrayOf(PropTypes.shape({
 		title: PropTypes.string.isRequired,
 		avaliableCards: PropTypes.number.isRequired
-	})).isRequired
+	}))
 }
 
 const mapStateToProps = ({ decks }) => decks

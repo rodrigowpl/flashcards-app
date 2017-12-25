@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import { white, blackDark, grayDark } from 'style/colors'
 
@@ -28,5 +29,9 @@ const Deck = ({ deck, marginTop = false }) => (
     <AvaliableCardStyled>{deck.avaliableCards}</AvaliableCardStyled>
   </DeckStyled>
 )
+
+Deck.propTypes = {
+  marginTop: PropTypes.bool
+}
 
 export default Deck
