@@ -1,2 +1,5 @@
+import AddDeck from './add-deck'
+import DeckDetail from './deck-detail'
+
 export { Decks } from './decks'
-export { AddDeck } from './add-deck'
+export { AddDeck, DeckDetail }

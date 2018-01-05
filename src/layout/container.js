@@ -1,17 +1,21 @@
 import React from 'react'
-import styled from 'styled-components/native'
+import { View, StyleSheet } from 'react-native'
 import { graySemiLight } from 'style/colors'
 
-const ContainerStyled = styled.View`
-  flex: 1;
-  background-color: ${graySemiLight};
-  ${p => !p.stretch && `padding: 10px;`}
-`
-
 const Container = ({ children, stretch = false }) => (
-  <ContainerStyled stretch={stretch}>
+  <View style={styles(stretch).container}>
     {children}
-  </ContainerStyled>
+  </View>
+)
+
+const styles = (stretch) => (
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: graySemiLight,
+      padding: stretch ? 0 : 10
+    }
+  })
 )
 
 export { Container }

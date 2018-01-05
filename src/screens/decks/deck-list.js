@@ -1,28 +1,25 @@
 import React, { PureComponent } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
-import { searchDecks } from 'reducers/decks/action-creators'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getDecks } from 'reducers/decks/action-creators'
 import Deck from './deck'
 
 class DeckList extends PureComponent {
 	componentDidMount () {
-		const { searchDecks } = this.props
-
-		searchDecks()
+		this.props.getDecks()
 	}
 
 	render () {
-		const { decks } = this.props
+		const { decks, onClickCard } = this.props
 
 		return (
 			<ScrollView>
-				{decks ? decks.map((deck, index) => (
-					<Deck
-						key={index}
-						deck={deck}
-						marginTop={index > 0} />
+				{decks.length > 0 ? decks.map((deck, index) => (
+					<TouchableOpacity key={index} onPress={() => onClickCard(deck)}>
+						<Deck deck={deck} />
+					</TouchableOpacity>
 				)) : <Text> Nenhum card :( </Text>}
 			</ScrollView>
 		)
@@ -31,13 +28,12 @@ class DeckList extends PureComponent {
 
 DeckList.propTypes = {
 	decks: PropTypes.arrayOf(PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		avaliableCards: PropTypes.number.isRequired
+		title: PropTypes.string.isRequired
 	}))
 }
 
 const mapStateToProps = ({ decks }) => decks
-const mapDispatchToProps = dispatch => bindActionCreators({ searchDecks }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getDecks }, dispatch)
 
 export default connect(
 	mapStateToProps,

@@ -1,30 +1,33 @@
 import React from 'react'
+import { StyleSheet ,TouchableHighlight, Text } from 'react-native'
 import PropTypes from 'prop-types'
-import styled from 'styled-components/native'
 import { blue, white, blueSemiLight } from 'style/colors'
 
-const RaisedButtonStyled = styled.TouchableHighlight`
-  height: 50px;
-  border-radius: 3px;
-  background-color: ${blue};
-  justify-content: center;
-  align-items: center;
-`
-
-const LabelStyled = styled.Text`
-  color: ${white};
-  font-size: 16px;
-  font-weight: bold;
-`
-
 const RaisedButton = ({ label, onPress, backgroundColor = blue, hoverColor = blueSemiLight }) => (
-  <RaisedButtonStyled 
+  <TouchableHighlight 
+    style={styles.button}
     onPress={onPress} 
     underlayColor={hoverColor}
     backgroundColor={backgroundColor}>
-    <LabelStyled>{label.toUpperCase()}</LabelStyled>
-  </RaisedButtonStyled>
+    <Text style={styles.text}>{label.toUpperCase()}</Text>
+  </TouchableHighlight>
 )
+
+const styles = StyleSheet.create({
+  button: {
+    height: 50,
+    borderRadius: 3,
+    backgroundColor: blue,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  text: {
+    color: white,
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
+})
 
 RaisedButton.propTypes = {
   label: PropTypes.string.isRequired,

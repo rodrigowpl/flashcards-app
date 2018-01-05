@@ -1,34 +1,37 @@
 import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import PropTypes from 'prop-types'
-import styled from 'styled-components/native'
 import { white, blackDark, grayDark } from 'style/colors'
 
-const DeckStyled = styled.View`
-  background-color: ${white};
-  height: 120px;
-  border-color: ${grayDark};
-  border-width: 1px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  margin-top: ${p => p.marginTop ? 10 : 0};
-`
-
-const TitleStyled = styled.Text`
-  color: ${blackDark};
-  font-size: 18px;
-`
-const AvaliableCardStyled = styled.Text`
-  color: ${grayDark};
-  font-size: 12px;
-`
-
-const Deck = ({ deck, marginTop = false }) => (
-  <DeckStyled marginTop={marginTop}>
-    <TitleStyled>{deck.title}</TitleStyled>
-    <AvaliableCardStyled>{deck.avaliableCards}</AvaliableCardStyled>
-  </DeckStyled>
+const Deck = ({ deck }) => (
+  <View style={styles.container}>
+    <Text style={styles.title}>{deck.title}</Text>
+    <Text style={styles.countCards}>{0}</Text>
+  </View>
 )
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: white,
+    height: 120,
+    borderColor: grayDark,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 6,
+    marginTop: 10
+  },
+
+  title: {
+    color: blackDark,
+    fontSize: 18
+  },
+
+  countCards: {
+    color: grayDark,
+    fontSize: 12
+  }
+})
 
 Deck.propTypes = {
   marginTop: PropTypes.bool

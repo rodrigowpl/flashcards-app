@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import ReduxThunk from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import reducers from 'reducers'
 import App from './app'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore)
+const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore)
 
 export default class Flashcards extends PureComponent {
   render () {

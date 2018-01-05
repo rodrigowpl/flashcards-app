@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.17",
-    "@storybook/addon-links": "^3.2.17",
-    "@storybook/react-native": "^3.2.17",
     "babel-plugin-module-resolver": "^3.0.0",
+    "chai": "^4.1.2",
+    "deep-freeze": "^0.0.1",
     "jest-expo": "23.0.0",
     "prop-types": "^15.6.0",
     "react-dom": "16.0.0",
     "react-native-scripts": "1.8.1",
-    "react-test-renderer": "16.0.0"
+    "react-test-renderer": "16.0.0",
+    "redux-logger": "^3.0.6"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -19,23 +19,30 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch",
-    "storybook": "storybook start -p 7007"
+    "test": "node node_modules/jest/bin/jest.js",
+    "test:watch": "node node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node node_modules/jest/bin/jest.js --coverage"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/components/index.js",
+      "!src/layout/index.js",
+      "!src/screens/index.js",
+      "!src/style/*.js",
+      "!src/redux-flow/index.js"
+    ]
   },
   "dependencies": {
-    "@storybook/cli": "^3.2.17",
     "expo": "^23.0.4",
-    "global": "^4.3.2",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-navigation": "^1.0.0-beta.21",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "styled-components": "^2.2.4",
     "uuid": "^3.1.0"
   }
 }

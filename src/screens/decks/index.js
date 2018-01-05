@@ -15,10 +15,16 @@ export class Decks extends PureComponent {
     navigation.navigate('AddDeck')
   }
 
+  navigateToDeckDetail = (deck) => {
+		const { navigation } = this.props
+
+		navigation.navigate('DeckDetail', { title: deck.title })
+	}
+
   render () {
     return (
       <Container>
-        <DeckList />
+        <DeckList onClickCard={this.navigateToDeckDetail} />
         <FloatingButton onPress={this.goAddDeckScreen} />
       </Container>
     )

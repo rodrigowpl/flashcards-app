@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation'
-import { Decks, AddDeck } from 'screens'
+import { Decks, AddDeck, DeckDetail } from 'screens'
 
 export const MainNavigation = StackNavigator({
   Decks: {
@@ -7,5 +7,11 @@ export const MainNavigation = StackNavigator({
   },
   AddDeck: {
     screen: AddDeck
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.title
+    })
   }
 })

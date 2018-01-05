@@ -1,36 +1,14 @@
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
-import styled from 'styled-components/native'
+import { KeyboardAvoidingView, Text, StyleSheet, View } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { addDeck } from 'reducers/decks/action-creators'
 import { Container } from 'layout'
 import { black, graySemiLight } from 'style/colors'
-import { RaisedButton } from 'components'
-import { saveData } from 'utils/storage'
-import { DECKS_DATA } from 'utils/constants'
+import { RaisedButton, Input } from 'components'
 import { v1 as uuid } from 'uuid'
 
-const FormStyled = styled.KeyboardAvoidingView`
-  flex: 1;
-  justify-content: center;
-  align-items: stretch;
-`
-
-const LabelStyled = styled.Text`
-  color: ${black};
-  height: 40px;
-  font-size: 26px;
-  textAlign: center;
-`
-
-const InputStyled = styled.TextInput`
-  color: ${black};
-  height: 40px;
-  font-size: 14px;
-  margin-top: 8px;
-  align-self: stretch;
-  padding-left: 5px;
-`
-
-export class AddDeck extends PureComponent {
+class AddDeck extends PureComponent {
   static navigationOptions = {
     title: 'NEW DECK'
   }
@@ -46,20 +24,13 @@ export class AddDeck extends PureComponent {
   createDeck = () => {
     const deck = {
       id: uuid(),
-      title: this.state.title
+      title: this.state.deckTitle
     }
 
-    saveData(DECKS_DATA, deck)
-    this.goBackDecksScreen()
-  }
+    const { addDeck, navigation } = this.props
 
-  refreshDecks = () => {
-
-  }
-
-  goBackDecksScreen = () => {
-    const { goBack } = this.props.navigation
-    goBack()
+    addDeck(deck)
+    navigation.goBack()
   }
 
   render () {
@@ -67,10 +38,10 @@ export class AddDeck extends PureComponent {
 
     return (
       <Container>
-        <FormStyled behavior="padding">
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
           <View>
-            <LabelStyled>What is the title of your deck?</LabelStyled>
-            <InputStyled
+            <Text style={styles.label}>What is the title of your deck?</Text>
+            <Input
               value={deckTitle}
               onChangeText={this.onChangeDeckTitle}
               placeholder='Deck title' />
@@ -80,8 +51,30 @@ export class AddDeck extends PureComponent {
               label='Create Deck'
               onPress={this.createDeck} />
           </View>
-        </FormStyled>
+        </KeyboardAvoidingView>
       </Container>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
+
+  label: {
+    color: black,
+    height: 40,
+    fontSize: 26,
+    textAlign: 'center'
+  }
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ addDeck }, dispatch)
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(AddDeck)

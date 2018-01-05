@@ -1,4 +1,9 @@
-import { SEARCH_DECKS } from './actions'
+import { 
+  DECKS_AVALIABLE, 
+  ADD_DECK, 
+  UPDATE_DECK, 
+  DELETE_DECK 
+} from './actions'
 
 export const initialState = {
   decks: []
@@ -6,7 +11,14 @@ export const initialState = {
 
 const decks = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_DECKS:
+    case ADD_DECK: 
+      let decks = [...state.decks]
+      decks.unshift(action.payload)
+      return {
+        ...state,
+        decks
+      }
+    case DECKS_AVALIABLE:
       return {
         ...state,
         decks: action.payload
