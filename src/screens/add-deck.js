@@ -46,11 +46,10 @@ class AddDeck extends PureComponent {
               onChangeText={this.onChangeDeckTitle}
               placeholder='Deck title' />
           </View>
-          <View style={{ marginTop: 20 }}>
-            <RaisedButton
-              label='Create Deck'
-              onPress={this.createDeck} />
-          </View>
+          <RaisedButton
+            label='Create Deck'
+            onPress={this.createDeck}
+            style={{ marginTop: 20 }} />
         </KeyboardAvoidingView>
       </Container>
     )

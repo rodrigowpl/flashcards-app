@@ -32,7 +32,7 @@ RaisedButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   backgroundColor: PropTypes.string,
   hoverColor: PropTypes.string,
-  style: PropTypes.number
+  style: PropTypes.object
 }
 
 export { RaisedButton }

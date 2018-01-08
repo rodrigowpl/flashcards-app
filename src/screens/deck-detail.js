@@ -6,18 +6,16 @@ import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
 import { green, greenSemiLight, blackDark, graySemiDark } from 'style/colors'
 
 class DeckDetail extends PureComponent {
-  componentDidMount () {
-    const { deckTitle, deckId } = this.props.navigation.state.params
-
-    console.log('deck id: ', deckId)
-  }
-
   goToAddCardScreen = () => {
+    const { navigation } = this.props
 
+    navigation.navigate('AddCard', { deckId: navigation.state.params.deckId })
   }
 
   goToQuizScreen = () => {
+    const { deckId } = this.props.navigation.state.params
 
+    console.log('deck id: ', deckId)
   }
 
   render () {
@@ -37,7 +35,7 @@ class DeckDetail extends PureComponent {
               onPress={this.goToAddCardScreen} />
             <RaisedButton 
               label='start quiz' 
-              style={styles.btnQuiz}
+              style={{ marginTop: 10 }}
               backgroundColor={green}
               hoverColor={greenSemiLight}
               onPress={this.goToQuizScreen} />
@@ -75,10 +73,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: SIZE_WIDTH_CONTAINER
-  },
-
-  btnQuiz: {
-    marginTop: 10
   }
 })
 

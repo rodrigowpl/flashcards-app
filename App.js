@@ -1,10 +1,4 @@
-import React, { Component } from 'react'
-import Flashcards from './src'
+import React from 'react'
+import FlashcardsApp from './src'
 
-export default class App extends Component {
-  render() {
-    return (
-      <Flashcards />
-    )
-  }
-}
+export default () => <FlashcardsApp />

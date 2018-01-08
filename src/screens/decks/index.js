@@ -4,7 +4,7 @@ import { Container } from 'layout'
 import DeckList from './deck-list'
 import { FloatingButton } from 'components'
 
-export class Decks extends PureComponent {
+class Decks extends PureComponent {
   static navigationOptions = {
     title: 'DECKS'
   }
@@ -30,3 +30,5 @@ export class Decks extends PureComponent {
     )
   }
 }
+
+export default Decks

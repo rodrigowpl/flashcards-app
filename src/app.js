@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Container, StatusBar } from 'layout'
-import { MainNavigation } from 'components'
+import MainScreenNavigation from 'screens'
 
 export default class App extends PureComponent {
   render () {
     return (
       <Container stretch={true}>
         <StatusBar />
-        <MainNavigation />
+        <MainScreenNavigation />
       </Container>
     )
   }

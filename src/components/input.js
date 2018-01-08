@@ -1,16 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { View, TextInput, Text, StyleSheet } from 'react-native'
 import { black } from 'style/colors'
 
-const Input = ({ label, placeholder, value, onChangeText }) => (
+const Input = ({ label, customRef, ...rest }) => (
   <View>
     {!!label && <Text style={styles.label}>{label.toUpperCase()}</Text>}
     <TextInput
       underlineColorAndroid={black}
       style={styles.input}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
+      ref={customRef}
+      {...rest}
     />
   </View>
 )
@@ -30,5 +30,10 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   }
 })
+
+Input.propTypes = {
+  label: PropTypes.string,
+  customRef: PropTypes.func
+}
 
 export { Input }
