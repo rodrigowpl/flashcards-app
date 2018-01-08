@@ -1,8 +1,6 @@
 import { 
   DECKS_AVALIABLE, 
-  ADD_DECK, 
-  UPDATE_DECK, 
-  DELETE_DECK 
+  ADD_DECK
 } from './actions'
 
 export const initialState = {

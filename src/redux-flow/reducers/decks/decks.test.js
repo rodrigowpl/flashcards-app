@@ -1,12 +1,7 @@
 import { expect } from 'chai'
 import deepFreeze from 'deep-freeze'
 import decks, { initialState } from './index'
-import { 
-  DECKS_AVALIABLE, 
-  ADD_DECK, 
-  UPDATE_DECK, 
-  DELETE_DECK 
-} from './actions'
+import { DECKS_AVALIABLE, ADD_DECK } from './actions'
 
 it('should decks be a function', () => {
   expect(decks).to.be.a('function')

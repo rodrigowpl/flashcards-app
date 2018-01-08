@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { ScrollView, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { getDecks } from 'reducers/decks/action-creators'
 import Deck from './deck'
 
-class DeckList extends PureComponent {
+class DeckList extends Component {
 	componentDidMount () {
 		this.props.getDecks()
 	}

@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { addCard } from 'reducers/cards/action-creators'
+import { View, Text } from 'react-native'
 import { Container } from 'layout'
 import { RaisedButton, Input } from 'components'
 
@@ -14,11 +17,12 @@ class AddCard extends PureComponent {
   }
 
   createCard = () => {
-    const { navigation } = this.props
+    const { addCard, navigation } = this.props
     const { deckId } = navigation.state.params
     const { question, answer } = this.state
 
-    console.log(deckId, question, answer)
+    addCard(deckId, question, answer)
+    navigation.goBack()
   }
 
   render () {
@@ -47,8 +51,6 @@ class AddCard extends PureComponent {
   }
 }
 
-const styles = StyleSheet.create({
+const mapDispatchToProps = dispatch => bindActionCreators({ addCard }, dispatch)
 
-})
-
-export default AddCard
+export default connect(null, mapDispatchToProps)(AddCard)
