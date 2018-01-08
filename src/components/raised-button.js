@@ -3,12 +3,11 @@ import { StyleSheet ,TouchableHighlight, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import { blue, white, blueSemiLight } from 'style/colors'
 
-const RaisedButton = ({ label, onPress, backgroundColor = blue, hoverColor = blueSemiLight }) => (
+const RaisedButton = ({ label, onPress, backgroundColor = blue, hoverColor = blueSemiLight, style }) => (
   <TouchableHighlight 
-    style={styles.button}
+    style={[styles.button, { backgroundColor } ,style]}
     onPress={onPress} 
-    underlayColor={hoverColor}
-    backgroundColor={backgroundColor}>
+    underlayColor={hoverColor}>
     <Text style={styles.text}>{label.toUpperCase()}</Text>
   </TouchableHighlight>
 )
@@ -17,7 +16,6 @@ const styles = StyleSheet.create({
   button: {
     height: 50,
     borderRadius: 3,
-    backgroundColor: blue,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -33,7 +31,8 @@ RaisedButton.propTypes = {
   label: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   backgroundColor: PropTypes.string,
-  hoverColor: PropTypes.string
+  hoverColor: PropTypes.string,
+  style: PropTypes.number
 }
 
 export { RaisedButton }

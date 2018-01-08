@@ -28,6 +28,7 @@ class DeckList extends PureComponent {
 
 DeckList.propTypes = {
 	decks: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.string.isRequired,
 		title: PropTypes.string.isRequired
 	}))
 }

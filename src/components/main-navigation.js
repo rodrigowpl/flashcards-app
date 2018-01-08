@@ -11,7 +11,7 @@ export const MainNavigation = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.title
+      title: navigation.state.params.deckTitle
     })
   }
 })

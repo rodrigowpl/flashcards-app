@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { graySemiLight } from 'style/colors'
+import { CONTAINER_PADDING } from 'style/sizes'
 
 const Container = ({ children, stretch = false }) => (
   <View style={styles(stretch).container}>
@@ -13,7 +14,7 @@ const styles = (stretch) => (
     container: {
       flex: 1,
       backgroundColor: graySemiLight,
-      padding: stretch ? 0 : 10
+      padding: stretch ? 0 : CONTAINER_PADDING
     }
   })
 )
