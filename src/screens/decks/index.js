@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Text } from 'react-native'
-import { Container } from 'layout'
+import { Container, Header } from 'layout'
 import DeckList from './deck-list'
 import { FloatingButton } from 'components'
 
@@ -25,9 +25,12 @@ class Decks extends PureComponent {
   
   render () {
     return (
-      <Container>
-        <DeckList onClickCard={this.navigateToDeckDetail} />
-        <FloatingButton onPress={this.goAddDeckScreen} />
+      <Container stretch={true}>
+        <Header title='decks' />
+        <Container>
+          <DeckList onClickCard={this.navigateToDeckDetail} />
+          <FloatingButton onPress={this.goAddDeckScreen} />
+        </Container>
       </Container>
     )
   }

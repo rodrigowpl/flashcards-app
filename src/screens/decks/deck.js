@@ -1,16 +1,22 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, View, Text, AsyncStorage } from 'react-native'
 import { white, blackDark, grayDark } from 'style/colors'
 
-class Deck extends Component {
+class Deck extends PureComponent {
   state = {
     countCards: 0
   }
 
   componentDidMount () {
-    const { deck } = this.props
+    this.refreshCountCards()
+  }
 
-    console.log('deck: ', 'componentDidMount')
+  componentWillUpdate (nextProps, nextState) {
+    this.refreshCountCards()
+  }
+
+  refreshCountCards = () => {
+    const { deck } = this.props
 
     AsyncStorage.getItem('STORAGE_DATA_CARDS_KEY', (err, data) => {
       if (data != null) {

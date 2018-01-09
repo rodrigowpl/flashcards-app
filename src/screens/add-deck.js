@@ -3,16 +3,12 @@ import { KeyboardAvoidingView, Text, StyleSheet, View } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { addDeck } from 'reducers/decks/action-creators'
-import { Container } from 'layout'
+import { Container, Header } from 'layout'
 import { black, graySemiLight } from 'style/colors'
 import { RaisedButton, Input } from 'components'
 import { v1 as uuid } from 'uuid'
 
 class AddDeck extends PureComponent {
-  static navigationOptions = {
-    title: 'NEW DECK'
-  }
-
   state = {
     deckTitle: ''
   }
@@ -33,24 +29,34 @@ class AddDeck extends PureComponent {
     navigation.goBack()
   }
 
+  backPressed = () => {
+    const { navigation } = this.props
+    navigation.goBack()
+  }
+
   render () {
     const { deckTitle } = this.state
 
     return (
-      <Container>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-          <View>
-            <Text style={styles.label}>What is the title of your deck?</Text>
-            <Input
-              value={deckTitle}
-              onChangeText={this.onChangeDeckTitle}
-              placeholder='Deck title' />
-          </View>
-          <RaisedButton
-            label='Create Deck'
-            onPress={this.createDeck}
-            style={{ marginTop: 20 }} />
-        </KeyboardAvoidingView>
+      <Container stretch={true}>
+        <Header
+          title='new deck'
+          onBackPressed={this.backPressed} />
+        <Container>
+          <KeyboardAvoidingView style={styles.container} behavior="padding">
+            <View>
+              <Text style={styles.label}>What is the title of your deck?</Text>
+              <Input
+                value={deckTitle}
+                onChangeText={this.onChangeDeckTitle}
+                placeholder='Deck title' />
+            </View>
+            <RaisedButton
+              label='Create Deck'
+              onPress={this.createDeck}
+              style={{ marginTop: 20 }} />
+          </KeyboardAvoidingView>
+        </Container>
       </Container>
     )
   }

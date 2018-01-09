@@ -6,21 +6,29 @@ import Decks from './decks'
 
 export default StackNavigator({
   Decks: {
-    screen: Decks
+    screen: Decks,
+    navigationOptions: {
+      header: null
+    }
   },
   AddDeck: {
-    screen: AddDeck
+    screen: AddDeck,
+    navigationOptions: {
+      header: null
+    }
   },
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.deckTitle
+      title: navigation.state.params.deckTitle,
+      header: null
     })
   },
   AddCard: {
     screen: AddCard,
     navigationOptions: ({ navigation }) => ({
-      deckId: navigation.state.params.deckId
+      deckId: navigation.state.params.deckId,
+      header: null
     })
   }
 })

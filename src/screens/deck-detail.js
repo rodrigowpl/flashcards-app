@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { getDecks } from 'reducers/decks/action-creators'
 import { getCards } from 'reducers/cards/action-creators'
-import { Container } from 'layout'
+import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
 import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
 import { green, greenSemiLight, blackDark, graySemiDark } from 'style/colors'
@@ -11,6 +12,7 @@ import { green, greenSemiLight, blackDark, graySemiDark } from 'style/colors'
 class DeckDetail extends PureComponent {
   componentDidMount () {
     const { navigation, getCards } = this.props
+
     getCards(navigation.state.params.deckId)
   }
 
@@ -26,29 +28,41 @@ class DeckDetail extends PureComponent {
     console.log('deck id: ', deckId)
   }
 
+  backPressed = () => {
+    const { navigation, getDecks } = this.props
+
+    getDecks()
+    navigation.goBack()
+  }
+
   render () {
     const { navigation, countCards } = this.props
     const { deckTitle } = navigation.state.params
 
     return (
-      <Container>
-        <View style={styles.container}>
-          <View style={styles.deckInfo}>
-            <Text style={styles.titleDeck}>{deckTitle}</Text>
-            <Text style={styles.countCards}>{countCards} cards</Text>
+      <Container stretch={true}>
+        <Header
+          title={deckTitle}
+          onBackPressed={this.backPressed} />
+        <Container>
+          <View style={styles.container}>
+            <View style={styles.deckInfo}>
+              <Text style={styles.titleDeck}>{deckTitle}</Text>
+              <Text style={styles.countCards}>{countCards} cards</Text>
+            </View>
+            <View style={styles.actions}>
+              <RaisedButton 
+                label='add card'
+                onPress={this.goToAddCardScreen} />
+              <RaisedButton 
+                label='start quiz' 
+                style={{ marginTop: 10 }}
+                backgroundColor={green}
+                hoverColor={greenSemiLight}
+                onPress={this.goToQuizScreen} />
+            </View>
           </View>
-          <View style={styles.actions}>
-            <RaisedButton 
-              label='add card'
-              onPress={this.goToAddCardScreen} />
-            <RaisedButton 
-              label='start quiz' 
-              style={{ marginTop: 10 }}
-              backgroundColor={green}
-              hoverColor={greenSemiLight}
-              onPress={this.goToQuizScreen} />
-          </View>
-        </View>
+        </Container>
       </Container>
     )
   }
@@ -85,6 +99,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({ cards }) => ({ countCards: cards.cards.length })
-const mapDispatchToProps = dispatch => bindActionCreators({ getCards }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getCards, getDecks }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)

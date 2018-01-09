@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { addCard } from 'reducers/cards/action-creators'
 import { View, Text } from 'react-native'
-import { Container } from 'layout'
+import { Container, Header } from 'layout'
 import { RaisedButton, Input } from 'components'
 
 class AddCard extends PureComponent {
@@ -25,27 +25,37 @@ class AddCard extends PureComponent {
     navigation.goBack()
   }
 
+  backPressed = () => {
+    const { navigation } = this.props
+    navigation.goBack()
+  }
+
   render () {
     return (
-      <Container>
-        <Input 
-          label='Question'
-          onChangeText={(value) => this.onChangeText('question', value)}
-          placeholder='question of card'
-          returnKeyType='next'
-          onSubmitEditing={(e) => { this.answerRef.focus() }} />
-        <Input 
-          label='Answser'
-          customRef={node => this.answerRef = node}
-          onChangeText={(value) => this.onChangeText('answer', value)}
-          placeholder='answer of card'
-          returnKeyType='done'
-          onSubmitEditing={this.createCard} />
+      <Container stretch={true}>
+        <Header
+          title='new card'
+          onBackPressed={this.backPressed} />
+          <Container>
+            <Input 
+              label='Question'
+              onChangeText={(value) => this.onChangeText('question', value)}
+              placeholder='question of card'
+              returnKeyType='next'
+              onSubmitEditing={(e) => { this.answerRef.focus() }} />
+            <Input 
+              label='Answser'
+              customRef={node => this.answerRef = node}
+              onChangeText={(value) => this.onChangeText('answer', value)}
+              placeholder='answer of card'
+              returnKeyType='done'
+              onSubmitEditing={this.createCard} />
 
-        <RaisedButton
-          label='Create card'
-          style={{ marginTop: 10 }}
-          onPress={this.createCard} />
+            <RaisedButton
+              label='Create card'
+              style={{ marginTop: 10 }}
+              onPress={this.createCard} />
+          </Container>
       </Container>
     )
   }
