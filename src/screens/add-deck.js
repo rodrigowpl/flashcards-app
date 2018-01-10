@@ -23,10 +23,10 @@ class AddDeck extends PureComponent {
       title: this.state.deckTitle
     }
 
-    const { addDeck, navigation } = this.props
+    const { addDeck } = this.props
 
     addDeck(deck)
-    navigation.goBack()
+    this.backPressed()
   }
 
   backPressed = () => {

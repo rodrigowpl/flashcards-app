@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import deepFreeze from 'deep-freeze'
 import decks, { initialState } from './index'
-import { DECKS_AVALIABLE, ADD_DECK } from './actions'
+import { DECKS_AVALIABLE, ADD_DECK, UPDATE_DECK, DECK_DETAIL } from './actions'
 
 it('should decks be a function', () => {
   expect(decks).to.be.a('function')
@@ -30,31 +30,55 @@ it('should add deck', () => {
   expect(decks(state, action)).to.be.deep.equal(newState)
 })
 
-it('should add deck when already exists data', () => {
+it('should update decklist and deck when add card', () => {
   const state = {
-    decks: deepFreeze([
-      {
+    decks: deepFreeze([{
+        id: '1',
         title: 'new deck'
-      }
-    ])
+      }]),
+    deck: deepFreeze({
+      id: '1',
+      title: 'new deck'
+    })
   }
 
   const action = deepFreeze({
-    type: ADD_DECK,
+    type: UPDATE_DECK,
     payload: {
-      title: 'new deck 2'
+      id: '1',
+      title: 'new deck',
+      cards: [
+        {
+          question: 'one card',
+          answer: 'one'
+        }
+      ]
     }
   })
 
   const newState = {
     decks: [
       {
-        title: 'new deck 2'
-      },
-      {
-        title: 'new deck'
+        id: '1',
+        title: 'new deck',
+        cards: [
+          {
+            question: 'one card',
+            answer: 'one'
+          }
+        ]
       }
-    ]
+    ],
+    deck: {
+      id: '1',
+      title: 'new deck',
+      cards: [
+        {
+          question: 'one card',
+          answer: 'one'
+        }
+      ]
+    }
   }
 
   expect(decks(state, action)).to.be.deep.equal(newState)
@@ -69,13 +93,30 @@ it('should get decks avaliable', () => {
     type: DECKS_AVALIABLE,
     payload: [
       {
-        title: 'react'
+        title: 'react',
+        cards: [
+          {
+            question: 'react card 1',
+            answer: '1'
+          },
+          {
+            question: 'react card 2',
+            answer: '2'
+          }
+        ]
       },
       {
-        title: 'redux'
-      },
-      {
-        title: 'react-native'
+        title: 'redux',
+        cards: [
+          {
+            question: 'redux card 1',
+            answer: '1'
+          },
+          {
+            question: 'redux card 2',
+            answer: '2'
+          }
+        ]
       }
     ]
   })
@@ -83,15 +124,55 @@ it('should get decks avaliable', () => {
   const newState = {
     decks: [
       {
-        title: 'react'
+        title: 'react',
+        cards: [
+          {
+            question: 'react card 1',
+            answer: '1'
+          },
+          {
+            question: 'react card 2',
+            answer: '2'
+          }
+        ]
       },
       {
-        title: 'redux'
-      },
-      {
-        title: 'react-native'
+        title: 'redux',
+        cards: [
+          {
+            question: 'redux card 1',
+            answer: '1'
+          },
+          {
+            question: 'redux card 2',
+            answer: '2'
+          }
+        ]
       }
     ]
+  }
+
+  expect(decks(state, action)).to.be.deep.equal(newState)
+})
+
+it('should get deck detail', () => {
+  const state = {
+    deck: deepFreeze({})
+  }
+
+  const action = deepFreeze({
+    type: DECK_DETAIL,
+    payload: {
+      id: '1',
+      title: 'deck'
+    }
+  })
+
+  const newState = {
+    deck: {
+      id: '1',
+      title: 'deck'
+    }
   }
 
   expect(decks(state, action)).to.be.deep.equal(newState)

@@ -18,9 +18,7 @@ class Decks extends PureComponent {
   navigateToDeckDetail = (deck) => {
 		const { navigation } = this.props
 
-    navigation.navigate('DeckDetail', 
-      { deckTitle: deck.title, 
-        deckId: deck.id })
+    navigation.navigate('DeckDetail', { deckId: deck.id })
   }
   
   render () {

@@ -12,7 +12,7 @@ const Header = ({ title, onBackPressed }) => (
           <Feather name='arrow-left' size={26} />
         </TouchableOpacity>
       )}
-      <Text style={styles.title}>{title.toUpperCase()}</Text>
+      {title && <Text style={styles.title}>{title.toUpperCase()}</Text>}
     </View>
   </View>
 )

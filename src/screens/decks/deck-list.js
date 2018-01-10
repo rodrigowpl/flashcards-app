@@ -29,7 +29,8 @@ class DeckList extends Component {
 DeckList.propTypes = {
 	decks: PropTypes.arrayOf(PropTypes.shape({
 		id: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired
+		title: PropTypes.string.isRequired,
+		cards: PropTypes.array
 	}))
 }
 

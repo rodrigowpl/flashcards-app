@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addCard } from 'reducers/cards/action-creators'
+import { addCard } from 'reducers/decks/action-creators'
 import { View, Text } from 'react-native'
 import { Container, Header } from 'layout'
 import { RaisedButton, Input } from 'components'
@@ -22,6 +22,7 @@ class AddCard extends PureComponent {
     const { question, answer } = this.state
 
     addCard(deckId, question, answer)
+    
     navigation.goBack()
   }
 

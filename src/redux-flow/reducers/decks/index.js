@@ -1,10 +1,13 @@
 import { 
   DECKS_AVALIABLE, 
-  ADD_DECK
+  ADD_DECK,
+  UPDATE_DECK,
+  DECK_DETAIL
 } from './actions'
 
 export const initialState = {
-  decks: []
+  decks: [],
+  deck: {}
 }
 
 const decks = (state = initialState, action) => {
@@ -21,9 +24,33 @@ const decks = (state = initialState, action) => {
         ...state,
         decks: action.payload
       }
+    case UPDATE_DECK:
+      return {
+        ...state,
+        decks: updateObjectInArrayById(state.decks, action.payload),
+        deck: action.payload
+      }
+    case DECK_DETAIL:
+      return {
+        ...state,
+        deck: action.payload
+      }  
   }
 
   return state
+}
+
+const updateObjectInArrayById = (array = [], object = {}) => {
+  return array.map((item, index) => {
+    if (item.id !== object.id) {
+      return item
+    }
+
+    return {
+      ...item,
+      ...object
+    }
+  })
 }
 
 export default decks

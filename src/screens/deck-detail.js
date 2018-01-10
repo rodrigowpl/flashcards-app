@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { bindActionCreators } from 'redux'
+import { getDeck } from 'reducers/decks/action-creators'
 import { connect } from 'react-redux'
-import { getDecks } from 'reducers/decks/action-creators'
-import { getCards } from 'reducers/cards/action-creators'
 import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
 import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
@@ -11,44 +10,39 @@ import { green, greenSemiLight, blackDark, graySemiDark } from 'style/colors'
 
 class DeckDetail extends PureComponent {
   componentDidMount () {
-    const { navigation, getCards } = this.props
-
-    getCards(navigation.state.params.deckId)
+    const { getDeck, navigation } = this.props
+    const { deckId } = navigation.state.params
+    
+    getDeck(deckId)
   }
 
   goToAddCardScreen = () => {
-    const { navigation } = this.props
+    const { navigation, deck } = this.props
 
-    navigation.navigate('AddCard', { deckId: navigation.state.params.deckId })
+    navigation.navigate('AddCard', { deckId: deck.id })
   }
 
   goToQuizScreen = () => {
-    const { deckId } = this.props.navigation.state.params
-
-    console.log('deck id: ', deckId)
   }
 
   backPressed = () => {
-    const { navigation, getDecks } = this.props
-
-    getDecks()
+    const { navigation } = this.props
     navigation.goBack()
   }
 
   render () {
-    const { navigation, countCards } = this.props
-    const { deckTitle } = navigation.state.params
+    const { navigation, deck } = this.props
 
     return (
       <Container stretch={true}>
         <Header
-          title={deckTitle}
+          title={deck.title}
           onBackPressed={this.backPressed} />
         <Container>
           <View style={styles.container}>
             <View style={styles.deckInfo}>
-              <Text style={styles.titleDeck}>{deckTitle}</Text>
-              <Text style={styles.countCards}>{countCards} cards</Text>
+              <Text style={styles.titleDeck}>{deck.title}</Text>
+              <Text style={styles.countCards}>{typeof deck.cards !== 'undefined' ? deck.cards.length : 0} cards</Text>
             </View>
             <View style={styles.actions}>
               <RaisedButton 
@@ -98,7 +92,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ cards }) => ({ countCards: cards.cards.length })
-const mapDispatchToProps = dispatch => bindActionCreators({ getCards, getDecks }, dispatch)
+const mapStateToProps = ({ decks }) => decks
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getDeck }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)

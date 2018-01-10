@@ -20,8 +20,8 @@ export default StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.deckTitle,
-      header: null
+      header: null,
+      deckId: navigation.state.params.deckId
     })
   },
   AddCard: {

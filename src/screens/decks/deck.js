@@ -1,46 +1,13 @@
-import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text, AsyncStorage } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import { white, blackDark, grayDark } from 'style/colors'
 
-class Deck extends PureComponent {
-  state = {
-    countCards: 0
-  }
-
-  componentDidMount () {
-    this.refreshCountCards()
-  }
-
-  componentWillUpdate (nextProps, nextState) {
-    this.refreshCountCards()
-  }
-
-  refreshCountCards = () => {
-    const { deck } = this.props
-
-    AsyncStorage.getItem('STORAGE_DATA_CARDS_KEY', (err, data) => {
-      if (data != null) {
-        const cards = JSON.parse(data).filter(card => card.deckId === deck.id)
-        
-        this.setState({
-          countCards: cards.length
-        })
-      }
-    })
-  }
-
-  render () {
-    const { countCards } = this.state
-    const { deck } = this.props
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>{deck.title}</Text>
-        <Text style={styles.countCards}>{countCards}</Text>
-      </View>
-    )
-  }
-}
+const Deck = ({ deck }) => (
+  <View style={styles.container}>
+    <Text style={styles.title}>{deck.title}</Text>
+    <Text style={styles.countCards}>{typeof deck.cards !== 'undefined' ? deck.cards.length : 0}</Text>
+  </View>
+)
 
 const styles = StyleSheet.create({
   container: {
