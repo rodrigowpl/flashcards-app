@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { getDeck } from 'reducers/decks/action-creators'
+import { getCards } from 'reducers/cards/action-creators'
 import { connect } from 'react-redux'
 import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
@@ -10,10 +11,11 @@ import { green, greenSemiLight, blackDark, graySemiDark } from 'style/colors'
 
 class DeckDetail extends PureComponent {
   componentDidMount () {
-    const { getDeck, navigation } = this.props
+    const { getDeck, getCards, navigation } = this.props
     const { deckId } = navigation.state.params
     
     getDeck(deckId)
+    getCards(deckId)
   }
 
   goToAddCardScreen = () => {
@@ -31,7 +33,7 @@ class DeckDetail extends PureComponent {
   }
 
   render () {
-    const { navigation, deck } = this.props
+    const { navigation, deck, countCards } = this.props
 
     return (
       <Container stretch={true}>
@@ -42,7 +44,7 @@ class DeckDetail extends PureComponent {
           <View style={styles.container}>
             <View style={styles.deckInfo}>
               <Text style={styles.titleDeck}>{deck.title}</Text>
-              <Text style={styles.countCards}>{typeof deck.cards !== 'undefined' ? deck.cards.length : 0} cards</Text>
+              <Text style={styles.countCards}>{countCards} cards</Text>
             </View>
             <View style={styles.actions}>
               <RaisedButton 
@@ -92,8 +94,13 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ decks }) => decks
+const mapStateToProps = ({ decks, cards }) => {
+  return {
+    deck: decks.deck,
+    countCards: cards.cards.length
+  }
+}
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getDeck }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getDeck, getCards }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)

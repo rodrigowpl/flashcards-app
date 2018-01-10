@@ -1,13 +1,41 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, AsyncStorage } from 'react-native'
 import { white, blackDark, grayDark } from 'style/colors'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getCards } from 'reducers/cards/action-creators'
 
-const Deck = ({ deck }) => (
-  <View style={styles.container}>
-    <Text style={styles.title}>{deck.title}</Text>
-    <Text style={styles.countCards}>{typeof deck.cards !== 'undefined' ? deck.cards.length : 0}</Text>
-  </View>
-)
+class Deck extends Component {
+  state = {
+    countCards: 0
+  }
+
+  componentDidMount () {
+    const { deck } = this.props
+
+    AsyncStorage.getItem('STORAGE_DATA_CARDS_KEY', (err, data) => {
+      if (data !== null) {
+        const cards = JSON.parse(data)
+
+        this.setState({
+          countCards: cards.filter(card => card.deckId === deck.id).length
+        })
+      }
+    })
+  }
+
+  render () {
+    const { deck } = this.props
+    const { countCards } = this.state
+
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>{deck.title}</Text>
+        <Text style={styles.countCards}>{countCards}</Text>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -32,4 +60,6 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Deck
+const mapDispatchToProps = dispatch => bindActionCreators({ getCards }, dispatch)
+
+export default connect(null, mapDispatchToProps)(Deck)

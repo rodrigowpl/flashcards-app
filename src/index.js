@@ -6,7 +6,7 @@ import logger from 'redux-logger'
 import reducers from 'reducers'
 import App from './app'
 
-const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore)
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 
 export default class Flashcards extends PureComponent {
   render () {
