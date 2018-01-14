@@ -2,12 +2,14 @@ import {
   DECKS_AVALIABLE, 
   ADD_DECK,
   UPDATE_DECK,
-  DECK_DETAIL
+  DECK_DETAIL,
+  CARDS_DECK_AVALIABLE
 } from './actions'
 
 export const initialState = {
   decks: [],
-  deck: {}
+  deck: {},
+  cards: []
 }
 
 const decks = (state = initialState, action) => {
@@ -34,7 +36,13 @@ const decks = (state = initialState, action) => {
       return {
         ...state,
         deck: action.payload
-      }  
+      }
+    case CARDS_DECK_AVALIABLE: {
+      return {
+        ...state,
+        cards: action.payload
+      }
+    }
   }
 
   return state

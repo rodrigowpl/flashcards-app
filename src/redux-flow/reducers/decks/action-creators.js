@@ -1,5 +1,12 @@
-import { DECKS_AVALIABLE, ADD_DECK, UPDATE_DECK, DECK_DETAIL } from './actions'
+import { 
+  DECKS_AVALIABLE, 
+  ADD_DECK, 
+  UPDATE_DECK, 
+  DECK_DETAIL,
+  CARDS_DECK_AVALIABLE
+} from './actions'
 import { AsyncStorage } from 'react-native'
+import { v1 as uuid } from 'uuid'
 
 const STORAGE_DATA_DECKS_KEY = 'STORAGE_DATA_DECKS_KEY'
 
@@ -24,7 +31,7 @@ export const getDeck = (deckId) => dispatch => {
 }
 
 export const addCard = (deckId, question, answer) => dispatch => {
-  const card = {question, answer}
+  const card = {id: uuid(), question, answer}
 
   AsyncStorage.getItem(STORAGE_DATA_DECKS_KEY, (err, data) => {
     let decks = JSON.parse(data)
@@ -47,5 +54,14 @@ export const getDecks = () => dispatch => {
     if (decks !== null) {
       dispatch({ type: DECKS_AVALIABLE,  payload: JSON.parse(decks)})
     }
+  })
+}
+
+export const getCards = (deckId) => dispatch => {
+  return AsyncStorage.getItem(STORAGE_DATA_DECKS_KEY, (err, decks) => {
+    const deck = JSON.parse(decks).find(d => d.id === deckId)
+    const cards = deck.cards || []
+    
+    dispatch({ type: CARDS_DECK_AVALIABLE, payload: cards})
   })
 }

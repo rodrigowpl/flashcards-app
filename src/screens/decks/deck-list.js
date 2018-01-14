@@ -20,7 +20,7 @@ class DeckList extends Component {
 					<TouchableOpacity key={index} onPress={() => onClickCard(deck)}>
 						<Deck deck={deck} />
 					</TouchableOpacity>
-				)) : <Text> Nenhum card :( </Text>}
+				)) : <Text> No decks :( </Text>}
 			</ScrollView>
 		)
 	}

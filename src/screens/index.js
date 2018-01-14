@@ -3,6 +3,7 @@ import AddDeck from './add-deck'
 import DeckDetail from './deck-detail'
 import AddCard from './add-card'
 import Decks from './decks'
+import Quiz from './quiz'
 
 export default StackNavigator({
   Decks: {
@@ -26,6 +27,13 @@ export default StackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: ({ navigation }) => ({
+      deckId: navigation.state.params.deckId,
+      header: null
+    })
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: ({ navigation }) => ({
       deckId: navigation.state.params.deckId,
       header: null

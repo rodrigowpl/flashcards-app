@@ -1,7 +1,13 @@
 import { expect } from 'chai'
 import deepFreeze from 'deep-freeze'
 import decks, { initialState } from './index'
-import { DECKS_AVALIABLE, ADD_DECK, UPDATE_DECK, DECK_DETAIL } from './actions'
+import { 
+  DECKS_AVALIABLE, 
+  ADD_DECK, 
+  UPDATE_DECK, 
+  DECK_DETAIL,
+  CARDS_DECK_AVALIABLE
+} from './actions'
 
 it('should decks be a function', () => {
   expect(decks).to.be.a('function')
@@ -96,10 +102,12 @@ it('should get decks avaliable', () => {
         title: 'react',
         cards: [
           {
+            id: '1',
             question: 'react card 1',
             answer: '1'
           },
           {
+            id: '2',
             question: 'react card 2',
             answer: '2'
           }
@@ -109,10 +117,12 @@ it('should get decks avaliable', () => {
         title: 'redux',
         cards: [
           {
+            id: '3',
             question: 'redux card 1',
             answer: '1'
           },
           {
+            id: '4',
             question: 'redux card 2',
             answer: '2'
           }
@@ -127,10 +137,12 @@ it('should get decks avaliable', () => {
         title: 'react',
         cards: [
           {
+            id: '1',
             question: 'react card 1',
             answer: '1'
           },
           {
+            id: '2',
             question: 'react card 2',
             answer: '2'
           }
@@ -140,10 +152,12 @@ it('should get decks avaliable', () => {
         title: 'redux',
         cards: [
           {
+            id: '3',
             question: 'redux card 1',
             answer: '1'
           },
           {
+            id: '4',
             question: 'redux card 2',
             answer: '2'
           }
@@ -173,6 +187,45 @@ it('should get deck detail', () => {
       id: '1',
       title: 'deck'
     }
+  }
+
+  expect(decks(state, action)).to.be.deep.equal(newState)
+})
+
+it('should get cards avaliable', () => {
+  const state = {
+    cards: deepFreeze([])
+  }
+
+  const action = deepFreeze({
+    type: CARDS_DECK_AVALIABLE,
+    payload: [
+      {
+        id: '1',
+        question: 'a',
+        answer: 'b'
+      },
+      {
+        id: '2',
+        question: 'c',
+        answer: 'd'
+      }
+    ]
+  })
+
+  const newState = {
+    cards: [
+      {
+        id: '1',
+        question: 'a',
+        answer: 'b'
+      },
+      {
+        id: '2',
+        question: 'c',
+        answer: 'd'
+      }
+    ]
   }
 
   expect(decks(state, action)).to.be.deep.equal(newState)

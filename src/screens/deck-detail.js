@@ -23,6 +23,9 @@ class DeckDetail extends PureComponent {
   }
 
   goToQuizScreen = () => {
+    const { navigation, deck } = this.props
+
+    navigation.navigate('Quiz', { deckId: deck.id })
   }
 
   backPressed = () => {
@@ -32,6 +35,7 @@ class DeckDetail extends PureComponent {
 
   render () {
     const { navigation, deck } = this.props
+    const containsCards = typeof deck.cards !== 'undefined'
 
     return (
       <Container stretch={true}>
@@ -42,7 +46,7 @@ class DeckDetail extends PureComponent {
           <View style={styles.container}>
             <View style={styles.deckInfo}>
               <Text style={styles.titleDeck}>{deck.title}</Text>
-              <Text style={styles.countCards}>{typeof deck.cards !== 'undefined' ? deck.cards.length : 0} cards</Text>
+              <Text style={styles.countCards}>{containsCards ? deck.cards.length : 0} cards</Text>
             </View>
             <View style={styles.actions}>
               <RaisedButton 
@@ -53,7 +57,8 @@ class DeckDetail extends PureComponent {
                 style={{ marginTop: 10 }}
                 backgroundColor={green}
                 hoverColor={greenSemiLight}
-                onPress={this.goToQuizScreen} />
+                onPress={this.goToQuizScreen}
+                disable={!containsCards} />
             </View>
           </View>
         </Container>
