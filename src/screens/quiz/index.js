@@ -6,7 +6,7 @@ import { getCards } from 'reducers/decks/action-creators'
 import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
 import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
-import { blackDark, green, greenSemiLight, red, redSemiLight, greenDark, redDark } from 'style/colors'
+import { blackDark, green, greenSemiLight, red, redSemiLight, greenDark, redDark, grayLight } from 'style/colors'
 import { cancelLocalNotification } from 'utils/notification'
 
 export const calcPercentRate = (total, rate) => {
@@ -105,10 +105,14 @@ class Quiz extends PureComponent {
                 <Text style={styles.rateValue}>{successRate}%</Text>
               </View> :
               <View style={styles.alignCenter}>
-                <Text style={styles.labelQuiz}>{showAnswer ? pendingCard.answer : pendingCard.question}</Text>
-                <TouchableOpacity onPress={this.toggleAnswer}>
-                  <Text style={styles.toggleAnswer}>{showAnswer ? 'Question' : 'Answer'}</Text>
-                </TouchableOpacity>
+                <Text style={styles.quiz}>{showAnswer ? pendingCard.answer : pendingCard.question}</Text>
+                <RaisedButton 
+                  label={showAnswer ? 'Question' : 'Answer'}
+                  backgroundColor='transparent'
+                  hoverColor='transparent'
+                  textColor={redDark}
+                  onPress={this.toggleAnswer}
+                  style={{ width: SIZE_WIDTH_CONTAINER }} />
               </View>
              }
             </View>
@@ -156,10 +160,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
 
-  labelQuiz: {
+  quiz: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: blackDark
+    color: blackDark,
+    textAlign: 'center'
   },
 
   finishFeedback: {

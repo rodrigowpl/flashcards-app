@@ -12,14 +12,14 @@ class RaisedButton extends Component {
   }
 
   render () {
-    const { label, backgroundColor = blue, hoverColor = blueSemiLight, style, disable } = this.props
+    const { label, backgroundColor = blue, hoverColor = blueSemiLight, style, disable, textColor = white } = this.props
 
     return (
       <TouchableHighlight 
         style={[styles.button, { backgroundColor: disable ? gray : backgroundColor } ,style]}
         onPress={this.onPress} 
         underlayColor={disable ? gray : hoverColor}>
-        <Text style={styles.text}>{label.toUpperCase()}</Text>
+        <Text style={[styles.text, { color: textColor }]}>{label.toUpperCase()}</Text>
       </TouchableHighlight>
     )
   }
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: white,
     fontSize: 16,
     fontWeight: 'bold'
   }
@@ -45,6 +44,7 @@ RaisedButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   backgroundColor: PropTypes.string,
   hoverColor: PropTypes.string,
+  textColor: PropTypes.string,
   style: PropTypes.object,
   disable: PropTypes.bool
 }

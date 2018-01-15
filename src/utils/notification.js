@@ -30,7 +30,7 @@ export const setLocalNotification = () => {
             if (status === 'granted') {
               Notifications.cancelAllScheduledNotificationsAsync()
 
-              const nextHour = moment().add(1, 'hours').format()
+              const nextHour = moment().add(1, 'hours').valueOf()
 
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
