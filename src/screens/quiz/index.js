@@ -7,6 +7,7 @@ import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
 import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
 import { blackDark, green, greenSemiLight, red, redSemiLight, greenDark, redDark } from 'style/colors'
+import { cancelLocalNotification } from 'utils/notification'
 
 export const calcPercentRate = (total, rate) => {
   const value = rate * 100 / total
@@ -18,7 +19,8 @@ class Quiz extends PureComponent {
     pendingCard: {},
     cardIndex: 0,
     corretCount: 0,
-    showAnswer: false
+    showAnswer: false,
+    quizConcluded: false
   }
 
   async componentDidMount () {
@@ -49,9 +51,20 @@ class Quiz extends PureComponent {
       showAnswer: false
     })
 
-    if (cardIndex < cards.length) {
+    const isLastCard = cards.length === cardIndex
+    if (isLastCard) {
+      this.finishQuiz()
+    } else {
       this.upCardIndex()
     }
+  }
+
+  finishQuiz = () => {
+    this.setState({
+      quizConcluded: true
+    })
+
+    cancelLocalNotification()
   }
 
   upCardIndex = () => {
@@ -72,9 +85,8 @@ class Quiz extends PureComponent {
   }
 
   render () {
-    const { pendingCard, cardIndex, corretCount, showAnswer } = this.state
+    const { pendingCard, cardIndex, corretCount, showAnswer, quizConcluded } = this.state
     const { cards } = this.props
-    const quizConcluded = typeof pendingCard === 'undefined'
     const successRate = calcPercentRate(cards.length, corretCount)
 
     return (
