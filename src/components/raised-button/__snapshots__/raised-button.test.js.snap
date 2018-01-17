@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should be render correctly 1`] = `
+<TouchableHighlight
+  activeOpacity={0.85}
+  onPress={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 3,
+        "height": 50,
+        "justifyContent": "center",
+      },
+      Object {
+        "backgroundColor": "#6197c6",
+      },
+      undefined,
+    ]
+  }
+  underlayColor="#afcef3"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "fontSize": 16,
+          "fontWeight": "bold",
+        },
+        Object {
+          "color": "#ffffff",
+        },
+      ]
+    }
+  >
+    BUTTON
+  </Text>
+</TouchableHighlight>
+`;

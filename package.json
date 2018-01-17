@@ -6,7 +6,11 @@
     "babel-plugin-module-resolver": "^3.0.0",
     "chai": "^4.1.2",
     "deep-freeze": "^0.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.0",
     "jest-expo": "23.0.0",
+    "jest-serializer-enzyme": "^1.0.0",
     "prop-types": "^15.6.0",
     "react-dom": "16.0.0",
     "react-native-scripts": "1.8.1",
@@ -25,14 +29,22 @@
   },
   "jest": {
     "preset": "jest-expo",
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/setup-tests.js"
+    ],
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js",
+      "!src/screens/**/*.js",
       "!src/components/index.js",
       "!src/layout/index.js",
       "!src/screens/index.js",
       "!src/style/*.js",
-      "!src/redux-flow/index.js"
+      "!src/redux-flow/index.js",
+      "!src/redux-flow/reducers/decks/action-creators.js"
     ]
   },
   "dependencies": {

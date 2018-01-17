@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should be render correctly 1`] = `
+<TouchableHighlight
+  activeOpacity={0.85}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#6197c6",
+      "borderRadius": 70,
+      "bottom": 10,
+      "height": 70,
+      "justifyContent": "center",
+      "position": "absolute",
+      "right": 10,
+      "width": 70,
+    }
+  }
+  underlayColor="#afcef3"
+>
+  <Icon
+    allowFontScaling={false}
+    color="#ffffff"
+    name="add"
+    size={32}
+  />
+</TouchableHighlight>
+`;

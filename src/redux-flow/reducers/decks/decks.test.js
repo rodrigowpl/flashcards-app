@@ -230,3 +230,10 @@ it('should get cards avaliable', () => {
 
   expect(decks(state, action)).to.be.deep.equal(newState)
 })
+
+it('should return initialState when state is undefined', () => {
+  const state = undefined
+  const action = deepFreeze({})
+  const newState = initialState
+  expect(decks(state, action)).to.be.deep.equal(newState)
+})

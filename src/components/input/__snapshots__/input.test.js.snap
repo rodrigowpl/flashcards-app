@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should be render correctly 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#3b495e",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "marginLeft": 5,
+      }
+    }
+  >
+    LABEL
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    style={
+      Object {
+        "color": "#3b495e",
+        "fontSize": 14,
+        "height": 40,
+        "paddingLeft": 5,
+      }
+    }
+    underlineColorAndroid="#3b495e"
+  />
+</View>
+`;
