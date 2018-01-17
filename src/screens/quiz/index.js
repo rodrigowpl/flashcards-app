@@ -7,7 +7,7 @@ import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
 import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
 import { blackDark, green, greenSemiLight, red, redSemiLight, greenDark, redDark, grayLight } from 'style/colors'
-import { cancelLocalNotification } from 'utils/notification'
+import { scheduleNotification } from 'utils/notification'
 
 export const calcPercentRate = (total, rate) => {
   const value = rate * 100 / total
@@ -64,7 +64,7 @@ class Quiz extends PureComponent {
       quizConcluded: true
     })
 
-    cancelLocalNotification()
+    scheduleNotification()
   }
 
   upCardIndex = () => {
