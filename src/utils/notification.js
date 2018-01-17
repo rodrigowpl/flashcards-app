@@ -21,16 +21,14 @@ const createNotification = () => {
 }
 
 export const scheduleNotification = () => {
-  console.log('scheduleNotification')
-
   Notifications.cancelAllScheduledNotificationsAsync()
   
-  const nextDay = moment().add(1, 'days').valueOf()
+  const nextHour = moment().add(1, 'hours').valueOf()
 
   Notifications.scheduleLocalNotificationAsync(
     createNotification(),
     {
-      time: nextDay,
+      time: nextHour,
       repeat: 'day'
     }
   )

@@ -100,7 +100,7 @@ class Quiz extends PureComponent {
             <View style={styles.alignCenter}>
              {quizConcluded ? 
               <View style={styles.finishFeedback}>
-                <Text style={styles.congratzMessage}>Congratulaions! You've finished this quiz :)</Text>
+                <Text style={styles.congratzMessage}>Congratulations! You've finished this quiz :)</Text>
                 <Text style={styles.rateLabel}>Success rate:</Text>
                 <Text style={styles.rateValue}>{successRate}%</Text>
               </View> :
@@ -173,7 +173,8 @@ const styles = StyleSheet.create({
 
   congratzMessage: {
     fontSize: 18,
-    color: blackDark
+    color: blackDark,
+    textAlign: 'center'
   },
 
   rateLabel: {
