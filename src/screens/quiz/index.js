@@ -6,7 +6,7 @@ import { getCards } from 'reducers/decks/action-creators'
 import { Container, Header } from 'layout'
 import { RaisedButton } from 'components'
 import { SIZE_WIDTH_CONTAINER } from 'style/sizes'
-import { blackDark, green, greenSemiLight, red, redSemiLight, greenDark, redDark, grayLight } from 'style/colors'
+import { blackDark, green, greenSemiLight, red, redSemiLight, greenDark, redDark, grayLight, blue, blueSemiLight } from 'style/colors'
 import { scheduleNotification } from 'utils/notification'
 
 export const calcPercentRate = (total, rate) => {
@@ -18,7 +18,7 @@ class Quiz extends PureComponent {
   state = {
     pendingCard: {},
     cardIndex: 0,
-    corretCount: 0,
+    correctCount: 0,
     showAnswer: false,
     quizConcluded: false
   }
@@ -32,7 +32,7 @@ class Quiz extends PureComponent {
 
   markCardCorret = () => {
     this.setState(state => ({
-      corretCount: state.corretCount + 1
+      correctCount: state.correctCount + 1
     }))
 
     this.showNextCard()
@@ -84,10 +84,28 @@ class Quiz extends PureComponent {
     navigation.goBack()
   }
 
-  render () {
-    const { pendingCard, cardIndex, corretCount, showAnswer, quizConcluded } = this.state
+  restartQuiz = () => {
     const { cards } = this.props
-    const successRate = calcPercentRate(cards.length, corretCount)
+    const firstCard = cards[0]
+
+    this.setState({
+      quizConcluded: false,
+      pendingCard: firstCard,
+      cardIndex: 1,
+      correctCount: 0,
+      showAnswer: false
+    })
+  }
+
+  goBackToDeck = () => {
+    const { navigation } = this.props
+    navigation.goBack()
+  }
+
+  render () {
+    const { pendingCard, cardIndex, correctCount, showAnswer, quizConcluded } = this.state
+    const { cards } = this.props
+    const successRate = calcPercentRate(cards.length, correctCount)
 
     return (
       <Container stretch={true}>
@@ -129,6 +147,22 @@ class Quiz extends PureComponent {
                   backgroundColor={red}
                   hoverColor={redSemiLight}
                   onPress={this.markCardIncorret} />
+              </View>
+            }
+
+            {quizConcluded &&
+              <View style={styles.actions}>
+                <RaisedButton 
+                  label='Restart Quiz'
+                  backgroundColor={green}
+                  hoverColor={greenSemiLight}
+                  onPress={this.restartQuiz} />
+                <RaisedButton 
+                  label='Back to Deck' 
+                  style={{ marginTop: 10 }}
+                  backgroundColor={blue}
+                  hoverColor={blueSemiLight}
+                  onPress={this.goBackToDeck} />
               </View>
             }
           </View>
