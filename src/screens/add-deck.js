@@ -10,11 +10,15 @@ import { v1 as uuid } from 'uuid'
 
 class AddDeck extends PureComponent {
   state = {
-    deckTitle: ''
+    deckTitle: '',
+    pristine: true
   }
 
   onChangeDeckTitle = (deckTitle) => {
-    this.setState({ deckTitle })
+    this.setState({ 
+      deckTitle,
+      pristine: deckTitle === ''
+     })
   }
 
   createDeck = async () => {
@@ -43,7 +47,7 @@ class AddDeck extends PureComponent {
   }
 
   render () {
-    const { deckTitle } = this.state
+    const { deckTitle, pristine } = this.state
 
     return (
       <Container stretch={true}>
@@ -61,6 +65,7 @@ class AddDeck extends PureComponent {
             </View>
             <RaisedButton
               label='Create Deck'
+              disable={pristine}
               onPress={this.createDeck}
               style={{ marginTop: 20 }} />
           </KeyboardAvoidingView>

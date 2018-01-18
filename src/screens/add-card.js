@@ -9,11 +9,18 @@ import { RaisedButton, Input } from 'components'
 class AddCard extends PureComponent {
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    pristine: true
   }
 
   onChangeText = (name, value) => {
-    this.setState({ [name]: value })
+    this.setState({
+      [name]: value
+    }, () => {
+      this.setState(state => ({
+        pristine: state.question === '' || state.answer === ''
+      }))
+    })
   }
 
   createCard = () => {
@@ -32,6 +39,8 @@ class AddCard extends PureComponent {
   }
 
   render () {
+    const { pristine } = this.state
+
     return (
       <Container stretch={true}>
         <Header
@@ -54,6 +63,7 @@ class AddCard extends PureComponent {
 
             <RaisedButton
               label='Create card'
+              disable={pristine}
               style={{ marginTop: 10 }}
               onPress={this.createCard} />
           </Container>
