@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { KeyboardAvoidingView, Text, StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Text, StyleSheet, View, Keyboard } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { addDeck } from 'reducers/decks/action-creators'
@@ -17,16 +17,24 @@ class AddDeck extends PureComponent {
     this.setState({ deckTitle })
   }
 
-  createDeck = () => {
+  createDeck = async () => {
+    const deckId = uuid()
     const deck = {
-      id: uuid(),
+      id: deckId,
       title: this.state.deckTitle
     }
 
     const { addDeck } = this.props
 
-    addDeck(deck)
-    this.backPressed()
+    await addDeck(deck)
+    this.navigateToDeckDetail(deckId)
+    Keyboard.dismiss()
+  }
+
+  navigateToDeckDetail = (deckId) => {
+		const { navigation } = this.props
+
+    navigation.navigate('DeckDetail', { deckId: deckId })
   }
 
   backPressed = () => {

@@ -30,7 +30,8 @@ class DeckDetail extends PureComponent {
 
   backPressed = () => {
     const { navigation } = this.props
-    navigation.goBack()
+    
+    navigation.navigate('Decks')
   }
 
   render () {

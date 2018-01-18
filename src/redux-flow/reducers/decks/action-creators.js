@@ -11,7 +11,7 @@ import { v1 as uuid } from 'uuid'
 const STORAGE_DATA_DECKS_KEY = 'STORAGE_DATA_DECKS_KEY'
 
 export const addDeck = deck => dispatch => {
-  AsyncStorage.getItem(STORAGE_DATA_DECKS_KEY, (err, data) => {
+  return AsyncStorage.getItem(STORAGE_DATA_DECKS_KEY, (err, data) => {
     const decks = data !== null ? JSON.parse(data) : []
     decks.unshift(deck)
 
